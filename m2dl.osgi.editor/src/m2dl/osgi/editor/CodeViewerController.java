@@ -76,6 +76,7 @@ public class CodeViewerController {
 		/*
 		 * TODO close the opened file. The web viewer have to be clean.
 		 */
+		webViewer.getEngine().loadContent("");
 	}
 
 	@FXML
@@ -97,7 +98,7 @@ public class CodeViewerController {
 		 * TODO complete this section to load the selected bundle.
 		 */
 		if (selectedFile != null) {
-			Activator.logger.info("File selected: " + selectedFile.getName());
+			Activator.logger.info("File selected: " + selectedFile.getName());			
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
@@ -119,6 +120,7 @@ public class CodeViewerController {
 		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
+			webViewer.getEngine().load("file:/" + selectedFile.getPath());
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
