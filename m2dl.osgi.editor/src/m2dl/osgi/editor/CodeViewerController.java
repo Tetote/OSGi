@@ -1,6 +1,12 @@
 package m2dl.osgi.editor;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -98,7 +104,7 @@ public class CodeViewerController {
 		 * TODO complete this section to load the selected bundle.
 		 */
 		if (selectedFile != null) {
-			Activator.logger.info("File selected: " + selectedFile.getName());			
+			Activator.logger.info("File selected: " + selectedFile.getName());
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
@@ -120,10 +126,38 @@ public class CodeViewerController {
 		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
-			webViewer.getEngine().load("file:/" + selectedFile.getPath());
+			
+			readFile(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
+	}
+	
+	void readFile(File file) {
+		InputStream is = null;
+		try {
+			is = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		InputStreamReader isr = new InputStreamReader(is);
+		
+		BufferedReader br = new BufferedReader(isr);
+		
+		String html = "<html><head></head><body>";
+		String buffer;
+		
+		try {
+			while ((buffer = br.readLine()) != null) {
+				html = html + buffer.replaceAll("class", "<span style=\"color:blue;\">class</span>") + "<br/>";
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		html = html + "</body></html>";
+		
+		webViewer.getEngine().loadContent(html);
 	}
 
 	@FXML
