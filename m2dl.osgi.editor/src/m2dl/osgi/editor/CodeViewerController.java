@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -118,6 +120,10 @@ public class CodeViewerController {
 	@FXML
 	void fireMenuOpenFile(ActionEvent event) {
 		final FileChooser fileChooser = new FileChooser();
+		
+		FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("SOURCE files (*.css) (*.java)", "*.css", "*.java");
+		fileChooser.getExtensionFilters().add(fileFilter);
+		
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
 		/*
