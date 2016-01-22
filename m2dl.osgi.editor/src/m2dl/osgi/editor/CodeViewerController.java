@@ -65,8 +65,11 @@ public class CodeViewerController {
 	 */
 	@FXML
 	private RadioMenuItem radioMenuCSS;
-	
-	private static BundleContext bundleContext;
+
+	/**
+	 * The bundle context.
+	 */
+	private BundleContext bundleContext;
 
 	/**
 	 * The button "À propos" have been clicked.
@@ -225,6 +228,10 @@ public class CodeViewerController {
 
 	public void setPrimaryStage(final Stage _stage) {
 		primaryStage = _stage;
+	}
+
+	public void setBundleContext(BundleContext bundleContext) {
+		this.bundleContext = bundleContext;
 	}
 
 }
