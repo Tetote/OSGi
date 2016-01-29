@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
-
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
-import org.osgi.framework.FrameworkUtil;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +29,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class CodeViewerController {
+
+	public static final String BUNDLE_PARSER = "m2dl.osgi.parser";
+	public static final String BUNDLE_COL_CSS = "m2dl.osgi.colorationCSS";
+	public static final String BUNDLE_COL_JAVA = "m2dl.osgi.colorationJAVA";
+
+	private Map<String, Bundle> mapBundle = new HashMap<>();
 
 	/**
 	 * The main window of the application.
@@ -99,7 +104,19 @@ public class CodeViewerController {
 
 	@FXML
 	void fireMenuExit(ActionEvent event) {
+		uninstallBundle();
 		System.exit(0);
+	}
+
+	// Uninstall all bundle
+	private void uninstallBundle() {
+		for (Bundle bundle : mapBundle.values()) {
+			try {
+				bundle.uninstall();
+			} catch (BundleException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -127,45 +144,24 @@ public class CodeViewerController {
 		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
-			activateBundle(selectedFile);
+
+			installBundle(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
 	}
 
-	private void activateBundle(File selectedFile) {
-		// TODO Auto-generated method stub
-		/*Bundle myBundle;
-		try {
-			myBundle = FrameworkUtil.getBundle(getClass()).getBundleContext()
-			myBundle.start();
-			System.out.println("The bundle " + selectedFile + " installed and started");
-		} catch (final BundleException e) {
-			e.printStackTrace();
-		}*/
+	private void installBundle(File selectedFile) {
 		Bundle myBundle;		
 		try {
 			myBundle = bundleContext.installBundle(selectedFile.toURI().toString());
-			System.out.println("SYMBOLIC_NAME  >>>> "+myBundle.getSymbolicName());
-			myBundle.start();
-			System.out.println("The bundle " + selectedFile + " installed and started");
+
+			mapBundle.put(myBundle.getSymbolicName(), myBundle);
+			System.out.println("The bundle " + selectedFile + " installed");
 		} catch (final BundleException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public static void installAndStartBundle(final String fileJar) {
-
-		final File fileBundle = new File(fileJar);
-		Bundle myBundle;
-		try {
-			myBundle = bundleContext.installBundle(fileBundle.toURI().toString());
-			myBundle.start();
-			System.out.println("The bundle " + fileJar + " installed and started");
-		} catch (final BundleException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	/**
 	 * The button to open a file have been clicked.
@@ -223,26 +219,55 @@ public class CodeViewerController {
 
 	@FXML
 	void fireRadioMenuCSS(ActionEvent event) {
-		/*
-		 * If the css bundle is stated -> stop it otherwise start it (if it has
-		 * been loaded before)
-		 */
+		if (mapBundle.get(BUNDLE_COL_CSS) != null) {
+			startStopBundle(mapBundle.get(BUNDLE_COL_CSS));
+		} else {
+			// TODO: cancel event
+		}
 	}
 
 	@FXML
 	void fireRadioMenuDecorator(ActionEvent event) {
-		/*
-		 * If the decorator bundle is stated -> stop it otherwise start it (if
-		 * it has been loaded before)
-		 */
+		if (mapBundle.get(BUNDLE_PARSER) != null) {
+			startStopBundle(mapBundle.get(BUNDLE_PARSER));
+		} else {
+			// TODO: cancel event
+		}
 	}
 
 	@FXML
 	void fireRadioMenuJava(ActionEvent event) {
-		/*
-		 * If the Java bundle is stated -> stop it otherwise start it (if it has
-		 * been loaded before)
-		 */
+		if (mapBundle.get(BUNDLE_COL_JAVA) != null) {
+			startStopBundle(mapBundle.get(BUNDLE_COL_JAVA));
+		} else {
+			// TODO: cancel event
+		}
+	}
+
+	private void startStopBundle(Bundle bundle) {
+		System.out.println("Call startStopBundle " + bundle.getSymbolicName());
+
+		switch (bundle.getState()) {
+		case Bundle.ACTIVE:
+			try {
+				System.out.println("Stopping bundle " + bundle.getSymbolicName());
+				bundle.stop();
+			} catch (BundleException e) {
+				e.printStackTrace();
+			}
+			break;
+		case Bundle.RESOLVED:
+		case Bundle.INSTALLED:
+			try {
+				System.out.println("Starting bundle " + bundle.getSymbolicName());
+				bundle.start();
+			} catch (BundleException e) {
+				e.printStackTrace();
+			}
+			break;
+		default:
+			System.out.println("State => " + bundle.getState());
+		}
 	}
 
 	@FXML
