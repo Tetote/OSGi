@@ -30,9 +30,9 @@ import javafx.stage.Stage;
 
 public class CodeViewerController {
 
-	public static final String BUNDLE_PARSER = "m2dl.osgi.parser";
+	public static final String BUNDLE_PARSER = "m2dl.osgi.decorator";
 	public static final String BUNDLE_COL_CSS = "m2dl.osgi.colorationCSS";
-	public static final String BUNDLE_COL_JAVA = "m2dl.osgi.colorationJAVA";
+	public static final String BUNDLE_COL_JAVA = "m2dl.osgi.colorationJava";
 
 	private Map<String, Bundle> mapBundle = new HashMap<>();
 

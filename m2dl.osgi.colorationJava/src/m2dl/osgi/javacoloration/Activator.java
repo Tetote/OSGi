@@ -15,7 +15,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext context) throws Exception {
 		context.registerService(ColorationJavaServiceImpl.class.getName(), new ColorationJavaServiceImpl(), null);
-		System.out.println("My bundle Decorator is started and registered");
+		System.out.println("My bundle ColorationJava is started and registered");
 	}
 	
 	/*
