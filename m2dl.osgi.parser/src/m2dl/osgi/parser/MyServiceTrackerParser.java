@@ -19,7 +19,7 @@ public class MyServiceTrackerParser implements ServiceTrackerCustomizer<EditorSe
 	public EditorService addingService(ServiceReference<EditorService> reference) {
 		final EditorService service = context.getService(reference);
 
-		System.out.println("A new \"MyService\" appeared with the extention type = "
+		System.out.println("A new EditorService appeared with the extention type = "
 				+ reference.getProperty("my.metadata.type"));
 
 		service.sayHello();

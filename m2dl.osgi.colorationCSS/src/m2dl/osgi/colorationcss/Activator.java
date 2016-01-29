@@ -21,7 +21,7 @@ public class Activator implements BundleActivator {
 				ParserService.class.getName(), trackerCustomizer);
 		mainService.open();
 
-		System.out.println("A tracker for \"MyService\" is started.");
+		System.out.println("A tracker for ParserService is started.");
 	}
 	
 	/*
@@ -29,7 +29,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Goodbye World!!");
+		System.out.println("Bundle CSS says Goodbye World!!");
 	}
 
 }

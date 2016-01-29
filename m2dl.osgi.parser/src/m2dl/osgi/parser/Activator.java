@@ -24,7 +24,7 @@ public class Activator implements BundleActivator {
 		dictionnary.put("my.metadata.type", "my.metadata.value");
 
 		bundleContext.registerService(ParserService.class.getName(), myService, dictionnary);
-		System.out.println("My bundle is started and registered");
+		System.out.println("My bundle Parser is started and registered");
 		
 		final ServiceTrackerCustomizer<EditorService, EditorService> trackerCustomizer = new MyServiceTrackerParser(
 				bundleContext);
@@ -33,7 +33,7 @@ public class Activator implements BundleActivator {
 				EditorService.class.getName(), trackerCustomizer);
 		mainService.open();
 
-		System.out.println("A tracker for \"MyService\" is started.");
+		System.out.println("A tracker for EditorService is started.");
 	}
 	
 	/*
@@ -41,7 +41,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Goodbye World!!");
+		System.out.println("Bundle Parser says Goodbye World!!");
 	}
 
 }

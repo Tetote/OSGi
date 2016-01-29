@@ -34,7 +34,7 @@ public class Activator implements BundleActivator {
 		dictionnary.put("my.metadata.type", "my.metadata.value");
 
 		bundleContext.registerService(EditorService.class.getName(), myService, dictionnary);
-		System.out.println("My bundle is started and registered");
+		System.out.println("My bundle Editor is started and registered");
 		
 		/*
 		 * Configuring the logger.

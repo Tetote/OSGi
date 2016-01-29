@@ -19,7 +19,7 @@ public class MyServiceTrackerColorationCSS implements ServiceTrackerCustomizer<P
 	public ParserService addingService(ServiceReference<ParserService> reference) {
 		final ParserService service = context.getService(reference);
 
-		System.out.println("A new \"MyService\" appeared with the extention type = "
+		System.out.println("A new ParserService appeared with the extention type = "
 				+ reference.getProperty("my.metadata.type"));
 
 		service.sayHello();
