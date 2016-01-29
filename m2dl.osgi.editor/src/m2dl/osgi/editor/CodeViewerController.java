@@ -133,8 +133,8 @@ public class CodeViewerController {
 		
 		if (new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins").exists()) {
 			fileChooser.setInitialDirectory(new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins"));
-		} else if (new File("BLA").exists()) {
-			fileChooser.setInitialDirectory(new File("BLA"));
+		} else if (new File("C:\\Users\\Lucas-PCP\\Documents\\FHCI-CSA\\OSGi\\Projet\\OSGi\\plugins").exists()) {
+			fileChooser.setInitialDirectory(new File("C:\\Users\\Lucas-PCP\\Documents\\FHCI-CSA\\OSGi\\Projet\\OSGi\\plugins"));
 		}
 
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
