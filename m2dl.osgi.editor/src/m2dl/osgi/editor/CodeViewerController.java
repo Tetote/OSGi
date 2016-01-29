@@ -114,6 +114,12 @@ public class CodeViewerController {
 		FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("Bundle files (*.jar)", "*.jar");
 		fileChooser.getExtensionFilters().add(fileFilter);
 		
+		if (new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins").exists()) {
+			fileChooser.setInitialDirectory(new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins"));
+		} else if (new File("BLA").exists()) {
+			fileChooser.setInitialDirectory(new File("BLA"));
+		}
+
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
 		/*
