@@ -7,6 +7,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -14,6 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import m2dl.osgi.editor.service.ColorationService;
+import m2dl.osgi.editor.tracker.ColorationServiceTracker;
 
 public class Activator implements BundleActivator {
 
@@ -28,13 +33,14 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		final EditorService myService = new EditorServiceImpl();
+		final ServiceTrackerCustomizer<ColorationService, ColorationService> colorTracker = new ColorationServiceTracker(
+				bundleContext);
 
-		final Hashtable<String, String> dictionnary = new Hashtable<>();
-		dictionnary.put("my.metadata.type", "my.metadata.value");
-
-		bundleContext.registerService(EditorService.class.getName(), myService, dictionnary);
-		System.out.println("My bundle Editor is started and registered");
+		final ServiceTracker<ColorationService, ColorationService> mainService = new ServiceTracker<ColorationService, ColorationService>(
+				bundleContext, ColorationService.class.getName(), colorTracker);
+		mainService.open();
+		
+		System.out.println("A tracker for \"ColorationService\" is started.");
 		
 		/*
 		 * Configuring the logger.

@@ -5,8 +5,8 @@ Bundle-SymbolicName: m2dl.osgi.colorationCSS
 Bundle-Version: 1.0.0
 Bundle-Activator: m2dl.osgi.colorationcss.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: m2dl.osgi.editor,
- m2dl.osgi.parser,
+Import-Package: m2dl.osgi.editor.service,
  org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.osgi
+Require-Bundle: org.eclipse.osgi,
+ m2dl.osgi.editor;bundle-version="1.0.0"

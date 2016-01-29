@@ -5,8 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
-import m2dl.osgi.editor.EditorService;
-import m2dl.osgi.parser.ParserService;
+import m2dl.osgi.javacoloration.service.impl.ColorationJavaServiceImpl;
 
 public class Activator implements BundleActivator {
 
@@ -15,14 +14,8 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
-		final ServiceTrackerCustomizer<ParserService, ParserService> trackerCustomizer = new MyServiceTrackerColorationJava(
-				context);
-
-		final ServiceTracker<ParserService, ParserService> mainService = new ServiceTracker<ParserService, ParserService>(context,
-				ParserService.class.getName(), trackerCustomizer);
-		mainService.open();
-
-		System.out.println("A tracker for ParserService is started.");
+		context.registerService(ColorationJavaServiceImpl.class.getName(), new ColorationJavaServiceImpl(), null);
+		System.out.println("My bundle Decorator is started and registered");
 	}
 	
 	/*

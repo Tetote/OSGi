@@ -1,11 +1,10 @@
-package m2dl.osgi.colorationcss;
+package m2dl.osgi.decorator;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
-import m2dl.osgi.colorationcss.service.impl.ColorationCssServiceImpl;
+import m2dl.osgi.decorator.service.impl.DecoratorServiceImpl;
+
 
 public class Activator implements BundleActivator {
 
@@ -13,9 +12,10 @@ public class Activator implements BundleActivator {
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
-	public void start(BundleContext context) throws Exception {
-		context.registerService(ColorationCssServiceImpl.class.getName(), new ColorationCssServiceImpl(), null);
+	public void start(BundleContext bundleContext) throws Exception {
+		bundleContext.registerService(DecoratorServiceImpl.class.getName(), new DecoratorServiceImpl(), null);
 		System.out.println("My bundle Decorator is started and registered");
+			
 	}
 	
 	/*
@@ -23,7 +23,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Bundle CSS says Goodbye World!!");
+		System.out.println("Bundle Parser says Goodbye World!!");
 	}
 
 }
