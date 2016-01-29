@@ -12,6 +12,11 @@ import java.util.ResourceBundle;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
+import org.osgi.framework.FrameworkUtil;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -60,6 +65,8 @@ public class CodeViewerController {
 	 */
 	@FXML
 	private RadioMenuItem radioMenuCSS;
+	
+	private static BundleContext bundleContext;
 
 	/**
 	 * The button "À propos" have been clicked.
@@ -100,6 +107,10 @@ public class CodeViewerController {
 	@FXML
 	void fireMenuLoadBundle(ActionEvent event) {
 		final FileChooser fileChooser = new FileChooser();
+		
+		FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("Bundle files (*.jar)", "*.jar");
+		fileChooser.getExtensionFilters().add(fileFilter);
+		
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
 		/*
@@ -107,9 +118,22 @@ public class CodeViewerController {
 		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
+			activateBundle(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
+	}
+
+	private void activateBundle(File selectedFile) {
+		// TODO Auto-generated method stub
+		/*Bundle myBundle;
+		try {
+			myBundle = FrameworkUtil.getBundle(getClass()).getBundleContext()
+			myBundle.start();
+			System.out.println("The bundle " + selectedFile + " installed and started");
+		} catch (final BundleException e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	/**

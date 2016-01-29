@@ -10,3 +10,5 @@ Import-Package: org.apache.log4j;version="1.2.15",
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/jfxrt.jar,
  .
+Export-Package: m2dl.osgi.editor
+Require-Bundle: org.eclipse.osgi

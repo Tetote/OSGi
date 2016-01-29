@@ -1,5 +1,7 @@
 package m2dl.osgi.editor;
 
+import java.util.Hashtable;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -26,6 +28,14 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
+		final EditorService myService = new EditorServiceImpl();
+
+		final Hashtable<String, String> dictionnary = new Hashtable<>();
+		dictionnary.put("my.metadata.type", "my.metadata.value");
+
+		bundleContext.registerService(EditorService.class.getName(), myService, dictionnary);
+		System.out.println("My bundle is started and registered");
+		
 		/*
 		 * Configuring the logger.
 		 */
