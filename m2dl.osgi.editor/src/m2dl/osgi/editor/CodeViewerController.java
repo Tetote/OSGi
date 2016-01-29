@@ -137,7 +137,29 @@ public class CodeViewerController {
 		} catch (final BundleException e) {
 			e.printStackTrace();
 		}*/
+		Bundle myBundle;		
+		try {
+			myBundle = bundleContext.installBundle(selectedFile.toURI().toString());
+			System.out.println("SYMBOLIC_NAME  >>>> "+myBundle.getSymbolicName());
+			myBundle.start();
+			System.out.println("The bundle " + selectedFile + " installed and started");
+		} catch (final BundleException e) {
+			e.printStackTrace();
+		}
 	}
+	
+	/*public static void installAndStartBundle(final String fileJar) {
+
+		final File fileBundle = new File(fileJar);
+		Bundle myBundle;
+		try {
+			myBundle = bundleContext.installBundle(fileBundle.toURI().toString());
+			myBundle.start();
+			System.out.println("The bundle " + fileJar + " installed and started");
+		} catch (final BundleException e) {
+			e.printStackTrace();
+		}
+	}*/
 
 	/**
 	 * The button to open a file have been clicked.
