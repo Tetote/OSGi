@@ -24,7 +24,6 @@ public class ColorationServiceTracker implements ServiceTrackerCustomizer<Colora
 
 	@Override
 	public void modifiedService(ServiceReference<ColorationService> reference, ColorationService service) {
-		// NOTHING
 	}
 
 	@Override

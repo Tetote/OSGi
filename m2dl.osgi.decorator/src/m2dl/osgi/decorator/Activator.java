@@ -11,15 +11,12 @@ import m2dl.osgi.editor.service.DecoratorService;
 
 
 public class Activator implements BundleActivator {
-
-	private static BundleContext context;
 	
 	/*
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
 		Dictionary<String, String> properties = new Hashtable<String, String>();
 		properties.put("type", "decorator");
 		properties.put("name", "DecoratorService");

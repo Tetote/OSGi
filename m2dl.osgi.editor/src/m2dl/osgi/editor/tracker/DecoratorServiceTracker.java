@@ -8,7 +8,6 @@ import m2dl.osgi.editor.service.DecoratorService;
 
 public class DecoratorServiceTracker implements ServiceTrackerCustomizer<DecoratorService, DecoratorService>{
 	
-
 	private CodeViewerController codeViewerController;
 
 	public DecoratorServiceTracker(CodeViewerController codeViewerController) {
@@ -24,7 +23,6 @@ public class DecoratorServiceTracker implements ServiceTrackerCustomizer<Decorat
 
 	@Override
 	public void modifiedService(ServiceReference<DecoratorService> reference, DecoratorService service) {
-		// NOTHING
 	}
 
 	@Override

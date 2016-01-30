@@ -94,9 +94,6 @@ public class CodeViewerController {
 
 	@FXML
 	void fireMenuCloseFile(ActionEvent event) {
-		/*
-		 * TODO close the opened file. The web viewer have to be clean.
-		 */
 		webViewer.getEngine().loadContent("");
 	}
 
@@ -129,17 +126,8 @@ public class CodeViewerController {
 		FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("Bundle files (*.jar)", "*.jar");
 		fileChooser.getExtensionFilters().add(fileFilter);
 
-		if (new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins").exists()) {
-			fileChooser.setInitialDirectory(new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins"));
-		} else if (new File("C:\\Users\\Lucas-PCP\\Documents\\FHCI-CSA\\OSGi\\Projet\\OSGi\\plugins").exists()) {
-			fileChooser.setInitialDirectory(new File("C:\\Users\\Lucas-PCP\\Documents\\FHCI-CSA\\OSGi\\Projet\\OSGi\\plugins"));
-		}
-
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
-		/*
-		 * TODO complete this section to load the selected bundle.
-		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
 
@@ -175,10 +163,6 @@ public class CodeViewerController {
 
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
-		/*
-		 * TODO complete this section to display the content of the file into
-		 * the webViewer.
-		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
 			if (this.decoratorService != null) {
