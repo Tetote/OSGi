@@ -1,9 +1,14 @@
 package m2dl.osgi.colorationcss.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import m2dl.osgi.editor.service.ColorationService;
 import m2dl.osgi.editor.service.TypeColorationService;
 
 public class ColorationCssServiceImpl implements ColorationService {
+
+	private Map<String, String> keywords;
 
 	@Override
 	public TypeColorationService getType() {
@@ -12,13 +17,31 @@ public class ColorationCssServiceImpl implements ColorationService {
 
 	@Override
 	public String colorate(String content) {
-		return "OK => " + content;
+		return replaceContent(content);
 	}
 
-	/*@Override
-	public String colorerCSS(String fileParsed) {
-		//TODO: algorithme pour colorer un file string avec les couleurs CSS
-		return null;
-	}*/
+	private String replaceContent(String content) {
+		String replacedContent = content;
 
+		for (String keyword : getKeyword().keySet()) {
+			String color = getKeyword().get(keyword);
+
+			replacedContent = replacedContent.replaceAll(":keyword\\{~" + keyword + "~\\}",
+					"<span style=\"color:" + color + "\">" + keyword + "</span>");
+		}
+
+		return replacedContent;
+	}
+
+	private Map<String, String> getKeyword() {
+		if (keywords != null) {
+			return keywords;
+		}
+
+		keywords = new HashMap<>();
+
+		keywords.put("class", "blue");
+
+		return keywords;
+	}
 }

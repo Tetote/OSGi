@@ -212,7 +212,11 @@ public class CodeViewerController {
 				}
 
 				if (colorationService != null) {
-					webViewer.getEngine().loadContent(colorationService.colorate(docoratedString));	
+					String html = "<html><head></head><body>";
+					html = html + colorationService.colorate(docoratedString);
+					html = html + "</body></html>";
+
+					webViewer.getEngine().loadContent(html);	
 				} else {
 					showDialog("Erreur de coloration fichier " + extension.toUpperCase(), "Veuillez importer le bundle pour la coloration "+extension.toUpperCase()+" et l'activer");
 				}
