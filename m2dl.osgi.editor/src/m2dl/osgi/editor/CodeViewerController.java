@@ -210,9 +210,11 @@ public class CodeViewerController {
 
 					webViewer.getEngine().loadContent(html);	
 				} else {
+					readFile(selectedFile);
 					showDialog("Erreur de coloration fichier " + extension.toUpperCase(), "Veuillez importer le bundle pour la coloration "+extension.toUpperCase()+" et l'activer");
 				}
 			} else {
+				readFile(selectedFile);
 				showDialog("Erreur de decoration du fichier ", "Veuillez importer le bundle pour la decoration et l'activer");
 			}
 		} else {
@@ -250,13 +252,13 @@ public class CodeViewerController {
 
 		try {
 			while ((buffer = br.readLine()) != null) {
-				html = html + "<br/>";
+				html += buffer + "<br/>";
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		html = html + "</body></html>";
+		html += "</body></html>";
 
 		webViewer.getEngine().loadContent(html);
 	}
