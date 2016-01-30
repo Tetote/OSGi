@@ -2,7 +2,7 @@ package m2dl.osgi.editor.service;
 
 public interface ColorationService {
 	
-	String sayHello(String content);
+	String colorate(String content);
 	
 	TypeColorationService getType();
 

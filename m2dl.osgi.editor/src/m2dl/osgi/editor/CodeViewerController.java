@@ -213,7 +213,7 @@ public class CodeViewerController {
 					break;
 				}
 				
-				webViewer.getEngine().loadContent(colorationService.sayHello(docoratedString));
+				webViewer.getEngine().loadContent(colorationService.colorate(docoratedString));
 			}
 			//readFile(selectedFile);
 		} else {

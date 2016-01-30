@@ -11,7 +11,7 @@ public class ColorationCssServiceImpl implements ColorationService {
 	}
 
 	@Override
-	public String sayHello(String content) {
+	public String colorate(String content) {
 		return "OK => " + content;
 	}
 
