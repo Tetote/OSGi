@@ -254,7 +254,7 @@ public class CodeViewerController {
 
 		try {
 			while ((buffer = br.readLine()) != null) {
-				html = html + buffer.replaceAll("class", "<span style=\"color:blue;\">class</span>") + "<br/>";
+				html = html + "<br/>";
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
