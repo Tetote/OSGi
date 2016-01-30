@@ -33,7 +33,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Bundle Parser says Goodbye World!!");
+		System.out.println("Bundle Decorator says Goodbye World!!");
 	}
 
 }

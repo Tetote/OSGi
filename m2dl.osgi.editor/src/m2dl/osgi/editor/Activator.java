@@ -18,7 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import m2dl.osgi.editor.service.ColorationService;
+import m2dl.osgi.editor.service.DecoratorService;
 import m2dl.osgi.editor.tracker.ColorationServiceTracker;
+import m2dl.osgi.editor.tracker.DecoratorServiceTracker;
 
 public class Activator implements BundleActivator {
 
@@ -75,6 +77,15 @@ public class Activator implements BundleActivator {
 					primaryStage.show();
 					windowIsRunning = true;
 					logger.info("The editor is running");
+					
+					// Register the service trackers
+					final ServiceTrackerCustomizer<DecoratorService, DecoratorService> decoratorCustomizer = new DecoratorServiceTracker(controller);
+					final ServiceTracker<DecoratorService,DecoratorService> mainServiceDecorator = new ServiceTracker<DecoratorService, DecoratorService>(context, DecoratorService.class.getName(), decoratorCustomizer);
+					mainServiceDecorator.open();
+					
+					/*final ServiceTrackerCustomizer<Colorizer, Colorizer> colorizerCustomizer = new ColorizerServiceTracker(controller);
+					final ServiceTracker<Colorizer, Colorizer> mainServiceColorizer = new ServiceTracker<Colorizer, Colorizer>(context, Colorizer.class.getName(), colorizerCustomizer);
+					mainServiceColorizer.open();*/
 
 				} catch (final Exception e) {
 					logger.debug("Error during loading the window");

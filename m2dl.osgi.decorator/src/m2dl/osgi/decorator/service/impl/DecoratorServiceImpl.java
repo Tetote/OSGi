@@ -9,6 +9,6 @@ public class DecoratorServiceImpl implements DecoratorService{
 	@Override
 	public void sayHello() {
 		// TODO Auto-generated method stub
-		System.out.println("ParserService says hello!");		
+		System.out.println("DecoratorService says hello!");		
 	}
 }

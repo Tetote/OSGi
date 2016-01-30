@@ -30,6 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import m2dl.osgi.editor.service.ColorationService;
+import m2dl.osgi.editor.service.DecoratorService;
 
 public class CodeViewerController {
 
@@ -38,6 +39,8 @@ public class CodeViewerController {
 	public static final String BUNDLE_COL_JAVA = "m2dl.osgi.colorationJava";
 
 	private Map<String, Bundle> mapBundle = new HashMap<>();
+	
+	public DecoratorService decoratorService = null;
 
 	/**
 	 * The main window of the application.
@@ -186,15 +189,10 @@ public class CodeViewerController {
 		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
-			ServiceReference<?>[] references;
-			try {
-				references = Activator.context.getServiceReferences(ColorationService.class.getName(), "(type=decorator)");
-				System.out.println(references);
-				//((ColorationService)bundleContext.getService(references[0])).sayHello();
-			} catch (InvalidSyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
+			if (this.decoratorService != null) {
+				DecoratorService decorator = this.decoratorService;
+				decorator.sayHello();
+			}
 			readFile(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
