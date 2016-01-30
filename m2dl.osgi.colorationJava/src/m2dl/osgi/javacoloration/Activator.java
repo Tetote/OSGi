@@ -5,8 +5,6 @@ import java.util.Hashtable;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import m2dl.osgi.editor.service.ColorationService;
 import m2dl.osgi.javacoloration.service.impl.ColorationJavaServiceImpl;
