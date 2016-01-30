@@ -233,7 +233,7 @@ public class CodeViewerController {
 		dialogVbox.setAlignment(Pos.CENTER);
 
 		dialogVbox.getChildren().add(new Text(text));
-		final Scene dialogScene = new Scene(dialogVbox, 400, 80);
+		final Scene dialogScene = new Scene(dialogVbox, 500, 80);
 		dialog.setScene(dialogScene);
 		dialog.show();
 	}
