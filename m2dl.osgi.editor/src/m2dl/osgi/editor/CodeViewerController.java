@@ -36,7 +36,7 @@ import m2dl.osgi.editor.service.TypeColorationService;
 public class CodeViewerController {
 
 	public static final String BUNDLE_PARSER = "m2dl.osgi.decorator";
-	public static final String BUNDLE_COL_CSS = "m2dl.osgi.colorationCss";
+	public static final String BUNDLE_COL_CSS = "m2dl.osgi.colorationCss1";
 	public static final String BUNDLE_COL_JAVA = "m2dl.osgi.colorationJava";
 
 	private Map<String, Bundle> mapBundle = new HashMap<>();

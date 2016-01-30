@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CssColoration
-Bundle-SymbolicName: m2dl.osgi.colorationCss
+Bundle-SymbolicName: m2dl.osgi.colorationCss1
 Bundle-Version: 1.0.0
 Bundle-Activator: m2dl.osgi.csscoloration.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
