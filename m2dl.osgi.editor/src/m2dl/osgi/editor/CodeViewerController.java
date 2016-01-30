@@ -15,8 +15,6 @@ import java.util.ResourceBundle;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceReference;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -190,8 +188,6 @@ public class CodeViewerController {
 
 				int i = selectedFile.getPath().lastIndexOf('.');
 				String extension = selectedFile.getPath().substring(i+1);
-				
-				System.out.println("MAP" + colorationServices);
 
 				ColorationService colorationService = null;
 				switch (extension) {
