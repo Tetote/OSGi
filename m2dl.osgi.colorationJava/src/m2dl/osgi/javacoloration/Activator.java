@@ -1,10 +1,14 @@
 package m2dl.osgi.javacoloration;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
+import m2dl.osgi.editor.service.ColorationService;
 import m2dl.osgi.javacoloration.service.impl.ColorationJavaServiceImpl;
 
 public class Activator implements BundleActivator {
@@ -14,7 +18,10 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
-		context.registerService(ColorationJavaServiceImpl.class.getName(), new ColorationJavaServiceImpl(), null);
+		Dictionary<String, String> properties = new Hashtable<String, String>();
+		properties.put("type", "java");
+		properties.put("name", "ColorationService");
+		context.registerService(ColorationService.class.getName(), new ColorationJavaServiceImpl(), properties);
 		System.out.println("My bundle ColorationJava is started and registered");
 	}
 	

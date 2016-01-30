@@ -22,6 +22,8 @@ import m2dl.osgi.editor.tracker.ColorationServiceTracker;
 
 public class Activator implements BundleActivator {
 
+	
+	public static BundleContext context;
 	/**
 	 * To know if the window is running.
 	 */
@@ -33,15 +35,7 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		final ServiceTrackerCustomizer<ColorationService, ColorationService> colorTracker = new ColorationServiceTracker(
-				bundleContext);
-
-		final ServiceTracker<ColorationService, ColorationService> mainService = new ServiceTracker<ColorationService, ColorationService>(
-				bundleContext, ColorationService.class.getName(), colorTracker);
-		mainService.open();
-		
-		System.out.println("A tracker for \"ColorationService\" is started.");
-		
+		Activator.context = bundleContext;
 		/*
 		 * Configuring the logger.
 		 */

@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import m2dl.osgi.editor.service.ColorationService;
 
 public class CodeViewerController {
 
@@ -154,7 +157,7 @@ public class CodeViewerController {
 	private void installBundle(File selectedFile) {
 		Bundle myBundle;		
 		try {
-			myBundle = bundleContext.installBundle(selectedFile.toURI().toString());
+			myBundle = Activator.context.installBundle(selectedFile.toURI().toString());
 
 			mapBundle.put(myBundle.getSymbolicName(), myBundle);
 			System.out.println("The bundle " + selectedFile + " installed");
@@ -183,7 +186,15 @@ public class CodeViewerController {
 		 */
 		if (selectedFile != null) {
 			Activator.logger.info("File selected: " + selectedFile.getName());
-			
+			ServiceReference<?>[] references;
+			try {
+				references = Activator.context.getServiceReferences(ColorationService.class.getName(), "(type=decorator)");
+				System.out.println(references);
+				//((ColorationService)bundleContext.getService(references[0])).sayHello();
+			} catch (InvalidSyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 			readFile(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
