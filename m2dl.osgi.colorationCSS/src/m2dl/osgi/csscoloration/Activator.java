@@ -1,9 +1,9 @@
-package m2dl.osgi.colorationcss;
+package m2dl.osgi.csscoloration;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import m2dl.osgi.colorationcss.service.impl.ColorationCssServiceImpl;
+import m2dl.osgi.csscoloration.service.impl.ColorationCssServiceImpl;
 
 public class Activator implements BundleActivator {
 

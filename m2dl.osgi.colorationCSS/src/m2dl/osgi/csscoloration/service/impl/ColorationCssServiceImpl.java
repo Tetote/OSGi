@@ -1,4 +1,4 @@
-package m2dl.osgi.colorationcss.service.impl;
+package m2dl.osgi.csscoloration.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,6 @@ import m2dl.osgi.editor.service.ColorationService;
 import m2dl.osgi.editor.service.TypeColorationService;
 
 public class ColorationCssServiceImpl implements ColorationService {
-
 	private Map<String, String> keywords;
 
 	@Override
