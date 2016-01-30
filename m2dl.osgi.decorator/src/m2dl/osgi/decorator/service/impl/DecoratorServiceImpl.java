@@ -64,7 +64,34 @@ public class DecoratorServiceImpl implements DecoratorService{
 
 		keywords = new ArrayList<>();
 
+		//JAVA
 		keywords.add("class");
+		keywords.add("if");
+		keywords.add("import");
+		keywords.add("else");
+		keywords.add("package");
+		keywords.add("case");
+		keywords.add("return");
+		keywords.add("for");
+		keywords.add("implements");
+		keywords.add("extends");
+		keywords.add("public");
+		keywords.add("private");
+		
+		
+		//CSS
+		keywords.add("font-size");
+		keywords.add("background");
+		keywords.add("color");
+		keywords.add("margin");
+		keywords.add("height");
+		keywords.add("width");
+		keywords.add("top");
+		keywords.add("left");
+		keywords.add("right");
+		keywords.add("bottom");		
+		keywords.add("text");
+		keywords.add("border");
 
 		return keywords;
 	}

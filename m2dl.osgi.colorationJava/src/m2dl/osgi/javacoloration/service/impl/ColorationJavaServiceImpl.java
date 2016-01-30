@@ -42,7 +42,18 @@ public class ColorationJavaServiceImpl implements ColorationService {
 
 		keywords = new HashMap<>();
 
-		keywords.put("class", "blue");
+		keywords.put("class", "red");
+		keywords.put("if", "red");
+		keywords.put("import", "orange");
+		keywords.put("else", "orange");
+		keywords.put("package", "yellow");
+		keywords.put("case", "yellow");
+		keywords.put("return", "green");
+		keywords.put("for", "green");
+		keywords.put("implements", "blue");
+		keywords.put("extends", "blue");
+		keywords.put("public", "indigo");
+		keywords.put("private", "indigo");
 
 		return keywords;
 	}

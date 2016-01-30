@@ -42,7 +42,16 @@ public class ColorationCssServiceImpl implements ColorationService {
 
 		keywords = new HashMap<>();
 
-		keywords.put("class", "blue");
+		keywords.put("font-size", "red");
+		keywords.put("background", "red" );
+		keywords.put("color", "orange" );
+		keywords.put("margin", "orange");
+		keywords.put("height", "yellow");
+		keywords.put("width", "yellow");
+		keywords.put("left", "green");
+		keywords.put("right", "blue");
+		keywords.put("bottom", "blue");
+		keywords.put("border", "indigo");
 
 		return keywords;
 	}
