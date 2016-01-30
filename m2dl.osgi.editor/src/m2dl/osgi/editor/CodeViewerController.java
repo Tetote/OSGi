@@ -91,15 +91,7 @@ public class CodeViewerController {
 	 */
 	@FXML
 	void fireMenuAPropos(ActionEvent event) {
-		final Stage dialog = new Stage();
-		dialog.initModality(Modality.APPLICATION_MODAL);
-		dialog.initOwner(primaryStage);
-		final VBox dialogVbox = new VBox(50);
-		dialogVbox.setAlignment(Pos.CENTER);
-		dialogVbox.getChildren().add(new Text("This is a modulable code viewer"));
-		final Scene dialogScene = new Scene(dialogVbox, 300, 80);
-		dialog.setScene(dialogScene);
-		dialog.show();
+		showDialog("A propos", "This is a modulable code viewer made by Lucas Bled & Théo Vaucher");
 	}
 
 	@FXML
@@ -274,7 +266,10 @@ public class CodeViewerController {
 		if (mapBundle.get(BUNDLE_COL_CSS) != null) {
 			startStopBundle(mapBundle.get(BUNDLE_COL_CSS));
 		} else {
-			// TODO: cancel event
+			RadioMenuItem radioMenuItem = (RadioMenuItem) event.getSource();
+			radioMenuItem.setSelected(false);
+
+			showDialog("Erreur de chargement du bundle", "Le bundle CSS n'est pas chargé");
 		}
 	}
 
@@ -283,7 +278,10 @@ public class CodeViewerController {
 		if (mapBundle.get(BUNDLE_PARSER) != null) {
 			startStopBundle(mapBundle.get(BUNDLE_PARSER));
 		} else {
-			// TODO: cancel event
+			RadioMenuItem radioMenuItem = (RadioMenuItem) event.getSource();
+			radioMenuItem.setSelected(false);
+
+			showDialog("Erreur de chargement du bundle", "Le bundle Decorator n'est pas chargé");
 		}
 	}
 
@@ -292,7 +290,10 @@ public class CodeViewerController {
 		if (mapBundle.get(BUNDLE_COL_JAVA) != null) {
 			startStopBundle(mapBundle.get(BUNDLE_COL_JAVA));
 		} else {
-			// TODO: cancel event
+			RadioMenuItem radioMenuItem = (RadioMenuItem) event.getSource();
+			radioMenuItem.setSelected(false);
+
+			showDialog("Erreur de chargement du bundle", "Le bundle JAVA n'est pas chargé");
 		}
 	}
 

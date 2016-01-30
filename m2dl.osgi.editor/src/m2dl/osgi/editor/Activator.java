@@ -62,8 +62,7 @@ public class Activator implements BundleActivator {
 
 					final VBox root = (VBox) loader.getRoot();
 					final Stage primaryStage = new Stage();
-					final Scene scene = new Scene(root, 400, 400);
-
+					final Scene scene = new Scene(root, 1280, 720);
 					final CodeViewerController controller = loader.getController();
 
 					controller.setPrimaryStage(primaryStage);
