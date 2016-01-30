@@ -40,7 +40,7 @@ public class CodeViewerController {
 	public static final String BUNDLE_COL_JAVA = "m2dl.osgi.colorationJava";
 
 	private Map<String, Bundle> mapBundle = new HashMap<>();
-	
+
 	public DecoratorService decoratorService = null;
 	public Map<TypeColorationService, ColorationService> colorationServices = new HashMap<>();
 
@@ -135,10 +135,10 @@ public class CodeViewerController {
 	@FXML
 	void fireMenuLoadBundle(ActionEvent event) {
 		final FileChooser fileChooser = new FileChooser();
-		
+
 		FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("Bundle files (*.jar)", "*.jar");
 		fileChooser.getExtensionFilters().add(fileFilter);
-		
+
 		if (new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins").exists()) {
 			fileChooser.setInitialDirectory(new File("D:\\Work\\M2\\FHCI\\OSGi\\src\\plugins"));
 		} else if (new File("C:\\Users\\Lucas-PCP\\Documents\\FHCI-CSA\\OSGi\\Projet\\OSGi\\plugins").exists()) {
@@ -179,10 +179,10 @@ public class CodeViewerController {
 	@FXML
 	void fireMenuOpenFile(ActionEvent event) {
 		final FileChooser fileChooser = new FileChooser();
-		
+
 		FileChooser.ExtensionFilter fileFilter = new FileChooser.ExtensionFilter("SOURCE files (*.css) (*.java)", "*.css", "*.java");
 		fileChooser.getExtensionFilters().add(fileFilter);
-		
+
 		final File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
 		/*
@@ -193,17 +193,15 @@ public class CodeViewerController {
 			Activator.logger.info("File selected: " + selectedFile.getName());
 			if (this.decoratorService != null) {
 				DecoratorService decorator = this.decoratorService;
-				
-				String docoratedString = decorator.decorate(selectedFile); //entré : File --> Sortie: String balisé
-				//colorator ENtré String balisé --> sortie : String coloré
-				
+
+				String docoratedString = decorator.decorate(selectedFile);
+
 				int i = selectedFile.getPath().lastIndexOf('.');
 				String extension = selectedFile.getPath().substring(i+1);
-				
+
 				System.out.println("" + extension);
-				
+
 				ColorationService colorationService = null;
-				
 				switch (extension) {
 				case "java":
 					colorationService = colorationServices.get(TypeColorationService.JAVA);
@@ -212,15 +210,34 @@ public class CodeViewerController {
 					colorationService = colorationServices.get(TypeColorationService.CSS);
 					break;
 				}
-				
-				webViewer.getEngine().loadContent(colorationService.colorate(docoratedString));
+
+				if (colorationService != null) {
+					webViewer.getEngine().loadContent(colorationService.colorate(docoratedString));	
+				} else {
+					showDialog("Erreur de coloration fichier " + extension.toUpperCase(), "Veuillez importer le bundle pour la coloration "+extension.toUpperCase()+" et l'activer");
+				}
+			} else {
+				showDialog("Erreur de decoration du fichier ", "Veuillez importer le bundle pour la decoration et l'activer");
 			}
-			//readFile(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
 	}
-	
+
+	private void showDialog(String title, String text) {
+		final Stage dialog = new Stage();
+		dialog.initModality(Modality.APPLICATION_MODAL);
+		dialog.initOwner(primaryStage);
+		dialog.setTitle(title);
+		final VBox dialogVbox = new VBox(50);
+		dialogVbox.setAlignment(Pos.CENTER);
+
+		dialogVbox.getChildren().add(new Text(text));
+		final Scene dialogScene = new Scene(dialogVbox, 400, 80);
+		dialog.setScene(dialogScene);
+		dialog.show();
+	}
+
 	void readFile(File file) {
 		InputStream is = null;
 		try {
@@ -229,12 +246,12 @@ public class CodeViewerController {
 			e.printStackTrace();
 		}
 		InputStreamReader isr = new InputStreamReader(is);
-		
+
 		BufferedReader br = new BufferedReader(isr);
-		
+
 		String html = "<html><head></head><body>";
 		String buffer;
-		
+
 		try {
 			while ((buffer = br.readLine()) != null) {
 				html = html + buffer.replaceAll("class", "<span style=\"color:blue;\">class</span>") + "<br/>";
@@ -242,9 +259,9 @@ public class CodeViewerController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		html = html + "</body></html>";
-		
+
 		webViewer.getEngine().loadContent(html);
 	}
 

@@ -13,8 +13,11 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import m2dl.osgi.editor.service.ColorationService;
@@ -86,7 +89,6 @@ public class Activator implements BundleActivator {
 					final ServiceTrackerCustomizer<ColorationService, ColorationService> colorationCustomizer = new ColorationServiceTracker(controller);
 					final ServiceTracker<ColorationService, ColorationService> mainServiceColoration = new ServiceTracker<ColorationService, ColorationService>(context, ColorationService.class.getName(), colorationCustomizer);
 					mainServiceColoration.open();
-
 				} catch (final Exception e) {
 					logger.debug("Error during loading the window");
 					e.printStackTrace();
