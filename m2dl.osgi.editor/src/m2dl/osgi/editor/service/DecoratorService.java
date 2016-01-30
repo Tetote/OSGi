@@ -1,7 +1,9 @@
 package m2dl.osgi.editor.service;
 
+import java.io.File;
+
 public interface DecoratorService {
-	
-	void sayHello();
+
+	String decorate(File file);
 
 }

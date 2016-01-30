@@ -83,9 +83,9 @@ public class Activator implements BundleActivator {
 					final ServiceTracker<DecoratorService,DecoratorService> mainServiceDecorator = new ServiceTracker<DecoratorService, DecoratorService>(context, DecoratorService.class.getName(), decoratorCustomizer);
 					mainServiceDecorator.open();
 					
-					/*final ServiceTrackerCustomizer<Colorizer, Colorizer> colorizerCustomizer = new ColorizerServiceTracker(controller);
-					final ServiceTracker<Colorizer, Colorizer> mainServiceColorizer = new ServiceTracker<Colorizer, Colorizer>(context, Colorizer.class.getName(), colorizerCustomizer);
-					mainServiceColorizer.open();*/
+					final ServiceTrackerCustomizer<ColorationService, ColorationService> colorationCustomizer = new ColorationServiceTracker(controller);
+					final ServiceTracker<ColorationService, ColorationService> mainServiceColoration = new ServiceTracker<ColorationService, ColorationService>(context, ColorationService.class.getName(), colorationCustomizer);
+					mainServiceColoration.open();
 
 				} catch (final Exception e) {
 					logger.debug("Error during loading the window");

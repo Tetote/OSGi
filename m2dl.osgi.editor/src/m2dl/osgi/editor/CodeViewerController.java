@@ -31,6 +31,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import m2dl.osgi.editor.service.ColorationService;
 import m2dl.osgi.editor.service.DecoratorService;
+import m2dl.osgi.editor.service.TypeColorationService;
 
 public class CodeViewerController {
 
@@ -41,6 +42,7 @@ public class CodeViewerController {
 	private Map<String, Bundle> mapBundle = new HashMap<>();
 	
 	public DecoratorService decoratorService = null;
+	public Map<TypeColorationService, ColorationService> colorationServices = new HashMap<>();
 
 	/**
 	 * The main window of the application.
@@ -191,9 +193,29 @@ public class CodeViewerController {
 			Activator.logger.info("File selected: " + selectedFile.getName());
 			if (this.decoratorService != null) {
 				DecoratorService decorator = this.decoratorService;
-				decorator.sayHello();
+				
+				String docoratedString = decorator.decorate(selectedFile); //entré : File --> Sortie: String balisé
+				//colorator ENtré String balisé --> sortie : String coloré
+				
+				int i = selectedFile.getPath().lastIndexOf('.');
+				String extension = selectedFile.getPath().substring(i+1);
+				
+				System.out.println("" + extension);
+				
+				ColorationService colorationService = null;
+				
+				switch (extension) {
+				case "java":
+					colorationService = colorationServices.get(TypeColorationService.JAVA);
+					break;
+				case "css":
+					colorationService = colorationServices.get(TypeColorationService.CSS);
+					break;
+				}
+				
+				webViewer.getEngine().loadContent(colorationService.sayHello(docoratedString));
 			}
-			readFile(selectedFile);
+			//readFile(selectedFile);
 		} else {
 			Activator.logger.info("File selection cancelled.");
 		}
@@ -267,6 +289,7 @@ public class CodeViewerController {
 			break;
 		case Bundle.RESOLVED:
 		case Bundle.INSTALLED:
+		case Bundle.STARTING:
 			try {
 				System.out.println("Starting bundle " + bundle.getSymbolicName());
 				bundle.start();

@@ -1,14 +1,18 @@
 package m2dl.osgi.colorationcss.service.impl;
 
 import m2dl.osgi.editor.service.ColorationService;
+import m2dl.osgi.editor.service.TypeColorationService;
 
 public class ColorationCssServiceImpl implements ColorationService {
 
 	@Override
-	public void sayHello() {
-		// TODO Auto-generated method stub
-		System.out.println("ColorationCssService says hello!");
+	public TypeColorationService getType() {
+		return TypeColorationService.CSS;
+	}
 
+	@Override
+	public String sayHello(String content) {
+		return "OK => " + content;
 	}
 
 	/*@Override
